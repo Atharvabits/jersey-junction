@@ -23,7 +23,17 @@ export default function OrderError() {
             <Button 
               variant="outline" 
               className="w-full"
-              onClick={() => window.open('https://wa.me/919076056680?text=Hi! I need help with placing an order.', '_blank')}
+              onClick={() => {
+                try {
+                  const newWindow = window.open('https://wa.me/919076056680?text=Hi! I need help with placing an order.', '_blank');
+                  if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                    window.location.href = 'https://wa.me/919076056680?text=Hi! I need help with placing an order.';
+                  }
+                } catch (error) {
+                  console.error('Error opening WhatsApp:', error);
+                  alert('Unable to open WhatsApp. Please contact us at +91 90760 56680');
+                }
+              }}
             >
               Contact us on WhatsApp
             </Button>

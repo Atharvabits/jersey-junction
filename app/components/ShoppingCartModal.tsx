@@ -23,24 +23,43 @@ export default function ShoppingCartModal() {
   function handleWhatsAppCheckout() {
     if (cartCount === 0) return;
     
-    const phoneNumber = "919076056680"; // WhatsApp number without + and spaces
-    
-    let message = `Hi! I want to purchase the following items:\n\n`;
-    
-    Object.values(cartDetails ?? {}).forEach((item, index) => {
-      message += `${index + 1}. *${item.name}*\n`;
-      message += `   Price: $${item.price}\n`;
-      message += `   Quantity: ${item.quantity}\n`;
-      message += `   Subtotal: $${(item.price * item.quantity).toFixed(2)}\n\n`;
-    });
-    
-    message += `*Total: $${totalPrice}*\n\n`;
-    message += `Please let me know the payment process.`;
-    
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    
-    window.open(whatsappUrl, '_blank');
+    try {
+      const phoneNumber = "919076056680"; // WhatsApp number without + and spaces
+      
+      let message = `Hi! I want to purchase the following items:\n\n`;
+      
+      Object.values(cartDetails ?? {}).forEach((item, index) => {
+        message += `${index + 1}. *${item.name}*\n`;
+        message += `   Price: ₹${item.price}\n`;
+        message += `   Quantity: ${item.quantity}\n`;
+        message += `   Subtotal: ₹${(item.price * item.quantity).toFixed(2)}\n\n`;
+      });
+      
+      message += `*Total: ₹${totalPrice}*\n\n`;
+      message += `Please let me know the payment process.`;
+      
+      // Use encodeURIComponent for proper URL encoding
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Use wa.me format which is more reliable
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+      
+      // Log for debugging
+      console.log('WhatsApp URL:', whatsappUrl);
+      console.log('Message:', message);
+      
+      // Try to open WhatsApp with error handling
+      const newWindow = window.open(whatsappUrl, '_blank');
+      
+      // Check if popup was blocked
+      if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+        // Fallback: try to navigate to WhatsApp Web
+        window.location.href = whatsappUrl;
+      }
+    } catch (error) {
+      console.error('Error opening WhatsApp:', error);
+      alert('Unable to open WhatsApp. Please contact us at +91 90760 56680');
+    }
   }
 
   return (
@@ -72,7 +91,7 @@ export default function ShoppingCartModal() {
                         <div>
                           <div className="flex justify-between text-base font-medium text-gray-900">
                             <h3>{entry.name}</h3>
-                            <p className="ml-4">${entry.price}</p>
+                            <p className="ml-4">₹{entry.price}</p>
                           </div>
                           <p className="mt-1 text-sm text-gray-500 line-clamp-2">
                             {entry.description}
@@ -103,7 +122,7 @@ export default function ShoppingCartModal() {
           <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
             <div className="flex justify-between text-base font-medium text-gray-900">
               <p>Subtotal:</p>
-              <p>${totalPrice}</p>
+              <p>₹{totalPrice}</p>
             </div>
             <p className="mt-0.5 text-sm text-gray-500">
               Contact us via WhatsApp for payment and delivery details.

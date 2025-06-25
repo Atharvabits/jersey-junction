@@ -35,8 +35,8 @@ function HeroFallback() {
               src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=500&q=80"
               alt="Fashion Collection - Hero Image 1"
               className="h-full w-full object-cover object-center"
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               priority
             />
           </div>
@@ -46,8 +46,8 @@ function HeroFallback() {
               src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=500&q=80"
               alt="Fashion Collection - Hero Image 2"
               className="h-full w-full object-cover object-center"
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               priority
             />
           </div>
@@ -55,24 +55,12 @@ function HeroFallback() {
       </div>
 
       <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
-        <div className="flex h-12 w-64 divide-x overflow-hidden rounded-lg border">
+        <div className="flex justify-center">
           <Link
-            href="/Men"
-            className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
+            href="/all"
+            className="flex items-center justify-center px-8 py-3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200 rounded-lg border"
           >
-            Men
-          </Link>
-          <Link
-            href="/Women"
-            className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
-          >
-            Women
-          </Link>
-          <Link
-            href="/Teens"
-            className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
-          >
-            Teens
+            Shop All Products
           </Link>
         </div>
       </div>
@@ -207,8 +195,8 @@ export default async function Hero() {
               alt="Hero Fashion Image 1"
               className="h-full w-full object-cover object-center"
               priority={true}
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               fallbackText="Hero Image 1"
               fallbackImageUrl="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=500&q=80"
             />
@@ -220,8 +208,8 @@ export default async function Hero() {
               alt="Hero Fashion Image 2"
               className="h-full w-full object-cover object-center"
               priority={true}
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               fallbackText="Hero Image 2"
               fallbackImageUrl="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=500&q=80"
             />
@@ -230,24 +218,12 @@ export default async function Hero() {
       </div>
 
       <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
-        <div className="flex h-12 w-64 divide-x overflow-hidden rounded-lg border">
+        <div className="flex justify-center">
           <Link
-            href="/Men"
-            className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
+            href="/all"
+            className="flex items-center justify-center px-8 py-3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200 rounded-lg border"
           >
-            Men
-          </Link>
-          <Link
-            href="/Women"
-            className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
-          >
-            Women
-          </Link>
-          <Link
-            href="/Teens"
-            className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
-          >
-            Teens
+            Shop All Products
           </Link>
         </div>
       </div>

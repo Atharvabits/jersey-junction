@@ -5,6 +5,7 @@ export interface simplifiedProduct {
   slug: string;
   categoryName: string;
   name: string;
+  size?: string[];
 }
 
 export interface fullProduct {
@@ -16,4 +17,5 @@ export interface fullProduct {
   name: string;
   description: string;
   price_id: string;
+  size?: string[];
 }

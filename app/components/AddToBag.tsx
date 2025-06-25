@@ -11,6 +11,7 @@ export interface ProductCart {
   currency: string;
   image: any;
   price_id: string;
+  slug?: string;
 }
 
 export default function AddToBag({
@@ -28,7 +29,7 @@ export default function AddToBag({
     description: description,
     price: price,
     currency: currency,
-    image: urlFor(image).url(),
+    image: image ? urlFor(image).url() : "/placeholder-image.jpg",
     price_id: price_id,
   };
   return (
@@ -36,8 +37,9 @@ export default function AddToBag({
       onClick={() => {
         addItem(product), handleCartClick();
       }}
+      className="bg-black hover:bg-gray-800 text-white px-8 py-3 text-sm font-semibold flex-1"
     >
-      Add To Cart
+      ADD TO CART
     </Button>
   );
 }

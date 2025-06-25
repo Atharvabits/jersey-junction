@@ -11,7 +11,8 @@ async function getData() {
         name,
           "slug": slug.current,
           "categoryName": category->name,
-          "imageUrl": images[0].asset->url
+          "imageUrl": images[0].asset->url,
+          size
       }`;
 
   const data = await client.fetch(query);

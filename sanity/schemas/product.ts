@@ -33,6 +33,27 @@ export default {
       type: 'number',
     },
     {
+      name: 'size',
+      title: 'Available Sizes',
+      type: 'array',
+      of: [
+        {
+          type: 'string'
+        }
+      ],
+      options: {
+        list: [
+          { title: 'Extra Small (XS)', value: 'XS' },
+          { title: 'Small (S)', value: 'S' },
+          { title: 'Medium (M)', value: 'M' },
+          { title: 'Large (L)', value: 'L' },
+          { title: 'Extra Large (XL)', value: 'XL' },
+          { title: 'Double Extra Large (XXL)', value: 'XXL' },
+          { title: 'Triple Extra Large (XXXL)', value: 'XXXL' }
+        ]
+      }
+    },
+    {
       name: 'price_id',
       title: 'Stripe Price ID',
       type: 'string',

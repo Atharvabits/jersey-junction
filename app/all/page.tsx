@@ -3,8 +3,8 @@ import { simplifiedProduct } from "../interface";
 import { client } from "../lib/sanity";
 import Image from "next/image";
 
-async function getData(cateogry: string) {
-  const query = `*[_type == "product" && category->name == "${cateogry}"] {
+async function getData() {
+  const query = `*[_type == "product"] | order(_createdAt desc) {
         _id,
           "imageUrl": images[0].asset->url,
           price,
@@ -21,20 +21,19 @@ async function getData(cateogry: string) {
 
 export const dynamic = "force-dynamic";
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { category: string };
-}) {
-  const data: simplifiedProduct[] = await getData(params.category);
+export default async function AllProductsPage() {
+  const data: simplifiedProduct[] = await getData();
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6  lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-            Our Products for {params.category}
+            All Products
           </h2>
+          <p className="text-sm text-gray-500">
+            {data.length} product{data.length !== 1 ? 's' : ''} found
+          </p>
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -68,7 +67,13 @@ export default async function CategoryPage({
             </div>
           ))}
         </div>
+
+        {data.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-500">No products found.</p>
+          </div>
+        )}
       </div>
     </div>
   );
-}
+} 
