@@ -60,7 +60,7 @@ async function SearchResultsContent({ query }: { query: string }) {
           Search Results
         </h1>
         <p className="mt-2 text-lg text-gray-600">
-          {results.length} {results.length === 1 ? 'result' : 'results'} for "{query}"
+          {results.length} {results.length === 1 ? 'result' : 'results'} for &quot;{query}&quot;
         </p>
       </div>
 

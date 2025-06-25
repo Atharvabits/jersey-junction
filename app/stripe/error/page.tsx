@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
@@ -12,7 +14,7 @@ export default function OrderError() {
             Something went wrong!
           </h3>
           <p className="text-gray-600 my-2">
-            Don't worry, you can still contact us directly on WhatsApp to place your order.
+            Don&apos;t worry, you can still contact us directly on WhatsApp to place your order.
           </p>
           <p className="text-gray-500 mb-4">WhatsApp: +91 90760 56680</p>
 

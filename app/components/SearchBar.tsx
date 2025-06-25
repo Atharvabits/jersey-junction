@@ -210,14 +210,14 @@ export default function SearchBar() {
                     }}
                     className="w-full text-center text-sm text-primary hover:text-primary/80 font-medium"
                   >
-                    View all results for "{query}"
+                    View all results for &quot;{query}&quot;
                   </button>
                 </div>
               )}
             </div>
           ) : (
             <div className="p-4 text-center text-sm text-gray-500">
-              No products found for "{query}"
+              No products found for &quot;{query}&quot;
             </div>
           )}
         </div>
