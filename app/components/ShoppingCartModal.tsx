@@ -18,20 +18,31 @@ export default function ShoppingCartModal() {
     cartDetails,
     removeItem,
     totalPrice,
-    redirectToCheckout,
   } = useShoppingCart();
 
-  async function handleCheckoutClick(event: any) {
-    event.preventDefault();
-    try {
-      const result = await redirectToCheckout();
-      if (result?.error) {
-        console.log("result");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  function handleWhatsAppCheckout() {
+    if (cartCount === 0) return;
+    
+    const phoneNumber = "919076056680"; // WhatsApp number without + and spaces
+    
+    let message = `Hi! I want to purchase the following items:\n\n`;
+    
+    Object.values(cartDetails ?? {}).forEach((item, index) => {
+      message += `${index + 1}. *${item.name}*\n`;
+      message += `   Price: $${item.price}\n`;
+      message += `   Quantity: ${item.quantity}\n`;
+      message += `   Subtotal: $${(item.price * item.quantity).toFixed(2)}\n\n`;
+    });
+    
+    message += `*Total: $${totalPrice}*\n\n`;
+    message += `Please let me know the payment process.`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
   }
+
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
       <SheetContent className="sm:max-w-lg w-[90vw]">
@@ -95,12 +106,12 @@ export default function ShoppingCartModal() {
               <p>${totalPrice}</p>
             </div>
             <p className="mt-0.5 text-sm text-gray-500">
-              Shipping and taxes are calculated at checkout.
+              Contact us via WhatsApp for payment and delivery details.
             </p>
 
             <div className="mt-6">
-              <Button onClick={handleCheckoutClick} className="w-full">
-                Checkout
+              <Button onClick={handleWhatsAppCheckout} className="w-full" disabled={cartCount === 0}>
+                Checkout via WhatsApp
               </Button>
             </div>
 

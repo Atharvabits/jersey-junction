@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useShoppingCart } from "use-shopping-cart";
 import { urlFor } from "../lib/sanity";
 import { ProductCart } from "./AddToBag";
 
@@ -13,28 +12,29 @@ export default function CheckoutNow({
   price,
   price_id,
 }: ProductCart) {
-  const { checkoutSingleItem } = useShoppingCart();
 
-  function buyNow(priceId: string) {
-    checkoutSingleItem(priceId);
+  function buyNowOnWhatsApp() {
+    const phoneNumber = "919076056680"; // WhatsApp number without + and spaces
+    const message = `Hi! I want to buy this product:
+
+*${name}*
+Price: $${price}
+Description: ${description}
+
+Please let me know the payment process.`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
   }
 
-  const product = {
-    name: name,
-    description: description,
-    price: price,
-    currency: currency,
-    image: urlFor(image).url(),
-    price_id: price_id,
-  };
   return (
     <Button
       variant="outline"
-      onClick={() => {
-        buyNow(product.price_id);
-      }}
+      onClick={buyNowOnWhatsApp}
     >
-      Checkout Now
+      Buy Now via WhatsApp
     </Button>
   );
 }
