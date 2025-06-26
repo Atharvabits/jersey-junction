@@ -95,7 +95,15 @@ export default function Navbar() {
         <div className="flex items-center mx-auto max-w-7xl px-4 py-2">
           {/* Left - Social (Hidden on small screens) */}
           <div className="hidden sm:flex items-center space-x-4">
-            <Instagram className="w-4 h-4 text-gray-600" />
+            <Link
+              href="https://www.instagram.com/jjfash.ash?igsh=MTI1bmxkYmZ3aTNiZA=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gray-800 transition-colors duration-200"
+              aria-label="Follow us on Instagram"
+            >
+              <Instagram className="w-6 h-6 text-gray-600 hover:text-gray-800" />
+            </Link>
           </div>
           
           {/* Mobile Menu Button */}
@@ -241,6 +249,20 @@ export default function Navbar() {
                 )}
               </div>
             ))}
+            
+            {/* Mobile Social Links */}
+            <div className="border-t border-gray-700 mt-4 pt-4">
+              <Link
+                href="https://www.instagram.com/jjfash.ash?igsh=MTI1bmxkYmZ3aTNiZA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setShowMobileMenu(false)}
+                className="flex items-center space-x-3 py-3 px-2 text-sm font-medium transition-colors duration-200 hover:text-gray-300 text-gray-300"
+              >
+                <Instagram className="w-5 h-5" />
+                <span>Follow us on Instagram</span>
+              </Link>
+            </div>
           </div>
         </div>
       )}
