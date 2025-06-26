@@ -19,10 +19,14 @@ async function getAllProducts() {
   return await client.fetch(query);
 }
 
-// New function to specifically debug 25/26 season
-async function debug25Season() {
+// New function to specifically debug categories
+async function debugCategories() {
   // Try different category name variations
-  const variations = ['25/26 SEASON', '25 26 season', '25-26-season', '25/26 Season'];
+  const variations = [
+    '25/26 SEASON', '25 26 season', '25-26-season', '25/26 Season',
+    'BASKETBALL JERSEYS', 'basketball-jerseys', 'Basketball Jerseys', 'basketball jerseys',
+    'CRICKET JERSEYS', 'cricket-jerseys', 'Cricket Jerseys', 'cricket jerseys'
+  ];
   const results: Record<string, any> = {};
   
   for (const variation of variations) {
@@ -42,17 +46,17 @@ async function debug25Season() {
 export default async function DebugPage() {
   const categories = await getAllCategories();
   const products = await getAllProducts();
-  const seasonDebug = await debug25Season();
+  const categoryDebug = await debugCategories();
 
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Debug Information</h1>
       
-      {/* 25/26 Season Specific Debug */}
+      {/* Category Debug */}
       <div className="mb-8 bg-yellow-50 p-4 rounded">
-        <h2 className="text-xl font-semibold mb-4 text-yellow-800">25/26 Season Debug:</h2>
+        <h2 className="text-xl font-semibold mb-4 text-yellow-800">Category Debug:</h2>
         <div className="space-y-4">
-          {Object.entries(seasonDebug).map(([variation, products]) => (
+          {Object.entries(categoryDebug).map(([variation, products]) => (
             <div key={variation}>
               <h3 className="font-medium text-yellow-700">Category name: "{variation}"</h3>
               <div className="bg-white p-3 rounded text-sm">

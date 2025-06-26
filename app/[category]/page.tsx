@@ -11,12 +11,22 @@ async function getData(category: string, team?: string) {
   // Special handling for specific URL patterns
   if (category === '25 26 season' || category === '25-26-season') {
     categoryName = '25/26 SEASON';
+  } else if (category === 'basketball-jerseys') {
+    categoryName = 'basketball-jerseys';
+  } else if (category === 'cricket-jerseys') {
+    categoryName = 'cricket-jerseys';
+  } else if (category === 'international-jerseys') {
+    categoryName = 'international-jerseys';
+  } else if (category === 'vintage-jerseys') {
+    categoryName = 'vintage-jerseys';
+  } else if (category === 'training-jackets') {
+    categoryName = 'training-jackets';
   } else {
     // For other categories, try both original and uppercase versions
-    categoryName = category.toUpperCase();
+    categoryName = category.toUpperCase().replace(/-/g, ' ');
   }
   
-  let query = `*[_type == "product" && (category->name == "${categoryName}" || category->name == "${category}" || category->name == "${category.toUpperCase()}")`;
+  let query = `*[_type == "product" && (category->name == "${categoryName}" || category->name == "${category}" || category->name == "${category.toUpperCase()}" || category->name == "${category.replace(/-/g, ' ').toUpperCase()}" || category->name == "${category.replace(/-/g, ' ')}")`;
   
   // If team is specified, filter by team as well
   if (team) {
@@ -37,6 +47,15 @@ async function getData(category: string, team?: string) {
       }`;
 
   const data = await client.fetch(query);
+  
+  // Debug logging
+  console.log('=== CATEGORY PAGE DEBUG ===');
+  console.log('Original category param:', category);
+  console.log('Resolved categoryName:', categoryName);
+  console.log('Query:', query);
+  console.log('Data found:', data);
+  console.log('Data length:', data.length);
+  
   return data;
 }
 
@@ -46,11 +65,21 @@ async function getTeamsForCategory(category: string) {
   
   if (category === '25 26 season' || category === '25-26-season') {
     categoryName = '25/26 SEASON';
+  } else if (category === 'basketball-jerseys') {
+    categoryName = 'basketball-jerseys';
+  } else if (category === 'cricket-jerseys') {
+    categoryName = 'cricket-jerseys';
+  } else if (category === 'international-jerseys') {
+    categoryName = 'international-jerseys';
+  } else if (category === 'vintage-jerseys') {
+    categoryName = 'vintage-jerseys';
+  } else if (category === 'training-jackets') {
+    categoryName = 'training-jackets';
   } else {
-    categoryName = category.toUpperCase();
+    categoryName = category.toUpperCase().replace(/-/g, ' ');
   }
   
-  const query = `*[_type == "product" && (category->name == "${categoryName}" || category->name == "${category}" || category->name == "${category.toUpperCase()}") && defined(team)] {
+  const query = `*[_type == "product" && (category->name == "${categoryName}" || category->name == "${category}" || category->name == "${category.toUpperCase()}" || category->name == "${category.replace(/-/g, ' ').toUpperCase()}" || category->name == "${category.replace(/-/g, ' ')}") && defined(team)] {
     team
   }`;
   
@@ -69,11 +98,17 @@ export default async function CategoryPage({
   params: { category: string };
   searchParams: { team?: string };
 }) {
+  console.log('=== MAIN COMPONENT DEBUG ===');
+  console.log('Raw params.category:', params.category);
+  
   const categoryName = decodeURIComponent(params.category).replace(/-/g, ' ');
   const teamFilter = searchParams.team;
   
-  const data: simplifiedProduct[] = await getData(categoryName, teamFilter);
-  const availableTeams = await getTeamsForCategory(categoryName);
+  console.log('Processed categoryName:', categoryName);
+  console.log('Original params.category:', params.category);
+  
+  const data: simplifiedProduct[] = await getData(params.category, teamFilter);
+  const availableTeams = await getTeamsForCategory(params.category);
 
   const formatCategoryName = (name: string) => {
     return name.charAt(0).toUpperCase() + name.slice(1).replace(/-/g, ' ');
