@@ -23,7 +23,7 @@ async function getAllProducts() {
 async function debug25Season() {
   // Try different category name variations
   const variations = ['25/26 SEASON', '25 26 season', '25-26-season', '25/26 Season'];
-  const results = {};
+  const results: Record<string, any> = {};
   
   for (const variation of variations) {
     const query = `*[_type == "product" && category->name == "${variation}"] {
@@ -116,8 +116,8 @@ export default async function DebugPage() {
             const categorySlug = cat.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             const teamsForCategory = products
               .filter((p: any) => p.categoryName === cat.name && p.team)
-              .map((p: any) => p.team);
-            const uniqueTeams = [...new Set(teamsForCategory)];
+              .map((p: any) => p.team as string);
+            const uniqueTeams = [...new Set(teamsForCategory)] as string[];
             
             return (
               <li key={cat.name}>

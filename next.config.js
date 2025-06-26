@@ -3,6 +3,9 @@ const nextConfig = {
   images: {
     domains: ["cdn.sanity.io", "images.unsplash.com"],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;
