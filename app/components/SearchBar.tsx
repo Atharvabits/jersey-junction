@@ -194,7 +194,7 @@ export default function SearchBar() {
                           {product.categoryName}
                         </p>
                         <p className="text-sm font-medium text-primary">
-                          ${product.price}
+                          ₹{product.price}
                         </p>
                       </div>
                     </div>
