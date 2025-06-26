@@ -17,16 +17,14 @@ function TeamDropdownInner({ teams, currentTeam, categorySlug }: TeamDropdownPro
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleTeamSelect = (team: string | null) => {
-    const params = new URLSearchParams(searchParams);
-    
     if (team) {
-      params.set('team', team.toLowerCase().replace(/\s+/g, '-'));
+      const teamSlug = team.toLowerCase().replace(/\s+/g, '-');
+      const newUrl = `/${categorySlug}/${teamSlug}`;
+      router.push(newUrl);
     } else {
-      params.delete('team');
+      // If "All Teams" selected, go back to category page
+      router.push(`/${categorySlug}`);
     }
-    
-    const newUrl = `/${categorySlug}${params.toString() ? '?' + params.toString() : ''}`;
-    router.push(newUrl);
     setIsOpen(false);
   };
 

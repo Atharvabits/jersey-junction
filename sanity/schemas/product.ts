@@ -78,13 +78,11 @@ export default {
       name: 'season',
       title: 'Season (for Football Jerseys)',
       type: 'string',
-      description: 'Specify the season (e.g., 2025/26, 2024/25)',
+      description: 'Specify the season (e.g., 2025/26, Vintage)',
       options: {
         list: [
           { title: '2025/26 Season', value: '2025/26' },
-          { title: '2024/25 Season', value: '2024/25' },
-          { title: '2023/24 Season', value: '2023/24' },
-          { title: 'Vintage', value: 'vintage' },
+          { title: 'Vintage', value: 'Vintage' },
         ]
       }
     },

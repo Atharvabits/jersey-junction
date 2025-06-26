@@ -5,7 +5,18 @@ import Image from "next/image";
 import TeamDropdownWrapper from "../components/TeamDropdownWrapper";
 
 async function getData(category: string, team?: string) {
-  let query = `*[_type == "product" && category->name == "${category}"]`;
+  // Handle URL to category name conversion
+  let categoryName = category;
+  
+  // Special handling for specific URL patterns
+  if (category === '25 26 season' || category === '25-26-season') {
+    categoryName = '25/26 SEASON';
+  } else {
+    // For other categories, try both original and uppercase versions
+    categoryName = category.toUpperCase();
+  }
+  
+  let query = `*[_type == "product" && (category->name == "${categoryName}" || category->name == "${category}" || category->name == "${category.toUpperCase()}")`;
   
   // If team is specified, filter by team as well
   if (team) {
@@ -13,7 +24,7 @@ async function getData(category: string, team?: string) {
     query += ` && team match "${teamFormatted}*"`;
   }
   
-  query += ` {
+  query += `] {
         _id,
           "imageUrl": images[0].asset->url,
           price,
@@ -30,7 +41,16 @@ async function getData(category: string, team?: string) {
 }
 
 async function getTeamsForCategory(category: string) {
-  const query = `*[_type == "product" && category->name == "${category}" && defined(team)] {
+  // Handle URL to category name conversion (same logic as getData)
+  let categoryName = category;
+  
+  if (category === '25 26 season' || category === '25-26-season') {
+    categoryName = '25/26 SEASON';
+  } else {
+    categoryName = category.toUpperCase();
+  }
+  
+  const query = `*[_type == "product" && (category->name == "${categoryName}" || category->name == "${category}" || category->name == "${category.toUpperCase()}") && defined(team)] {
     team
   }`;
   
