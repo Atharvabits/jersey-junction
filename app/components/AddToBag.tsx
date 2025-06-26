@@ -37,7 +37,7 @@ export default function AddToBag({
       onClick={() => {
         addItem(product), handleCartClick();
       }}
-      className="bg-black hover:bg-gray-800 text-white px-8 py-3 text-sm font-semibold flex-1"
+      className="w-full bg-black hover:bg-gray-800 text-white px-4 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm font-semibold"
     >
       ADD TO CART
     </Button>

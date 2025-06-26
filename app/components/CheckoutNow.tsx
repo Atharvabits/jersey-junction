@@ -60,14 +60,14 @@ Please let me know the payment process.`;
     <Button
       variant="outline"
       onClick={buyNowOnWhatsApp}
-      className="border-2 border-black text-black hover:bg-black hover:text-white px-8 py-3 text-sm font-semibold flex-1 relative"
+      className="w-full border-2 border-black text-black hover:bg-black hover:text-white px-4 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm font-semibold relative"
     >
-      <span className="flex items-center space-x-2">
+      <span className="flex items-center space-x-1 sm:space-x-2">
         <span>BUY NOW</span>
         <div className="flex space-x-1">
-          <div className="w-4 h-3 bg-yellow-400 rounded-sm"></div>
-          <div className="w-4 h-3 bg-red-500 rounded-sm"></div>
-          <div className="w-4 h-3 bg-blue-500 rounded-sm"></div>
+          <div className="w-3 h-2 sm:w-4 sm:h-3 bg-yellow-400 rounded-sm"></div>
+          <div className="w-3 h-2 sm:w-4 sm:h-3 bg-red-500 rounded-sm"></div>
+          <div className="w-3 h-2 sm:w-4 sm:h-3 bg-blue-500 rounded-sm"></div>
         </div>
       </span>
     </Button>

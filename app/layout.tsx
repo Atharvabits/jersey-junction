@@ -8,8 +8,9 @@ import ShoppingCartModal from "./components/ShoppingCartModal";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "JERSEY-JUNCTION - Football Fan Store",
-  description: "Premium football jerseys and fan merchandise",
+  title: "JERSEY-JUNCTION - Sports Fan Store",
+  description: "Premium cricket, football, and basketball jerseys and fan merchandise",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 export default function RootLayout({
@@ -19,6 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+      </head>
       <body className={inter.className}>
         <CartProvider>
           <Navbar />

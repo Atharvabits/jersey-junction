@@ -31,16 +31,16 @@ export default function ImageGallery({ images }: iAppProps) {
   }
 
   return (
-    <div className="grid gap-4 lg:grid-cols-5">
-      <div className="order-last flex gap-4 lg:order-none lg:flex-col">
+    <div className="grid gap-2 sm:gap-4 lg:grid-cols-5">
+      <div className="order-last flex gap-2 sm:gap-4 lg:order-none lg:flex-col">
         {imageArray.map((image: any, idx: any) => (
-          <div key={idx} className="overflow-hidden rounded-lg bg-gray-100">
+          <div key={idx} className="overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
             <Image
               src={urlFor(image).url()}
               width={100}
               height={100}
               alt="photo"
-              className="h-20 w-20 lg:h-24 lg:w-24 object-cover object-center cursor-pointer"
+              className="h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 object-cover object-center cursor-pointer"
               onClick={() => handleSmallImageClick(image)}
             />
           </div>
@@ -54,11 +54,11 @@ export default function ImageGallery({ images }: iAppProps) {
             alt="Photo"
             width={400}
             height={400}
-            className="h-72 w-full lg:h-96 lg:w-full object-cover object-center"
+            className="h-64 w-full sm:h-72 lg:h-96 lg:w-full object-cover object-center"
           />
         )}
 
-        <span className="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm uppercase tracking-wider text-white">
+        <span className="absolute left-0 top-0 rounded-br-lg bg-red-500 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm uppercase tracking-wider text-white">
           Sale
         </span>
       </div>
