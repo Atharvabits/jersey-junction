@@ -101,13 +101,15 @@ async function SearchResultsContent({ query }: { query: string }) {
           {results.map((product) => (
             <div key={product._id} className="group">
               <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
-                <Image
-                  src={product.imageUrl}
-                  alt={product.name}
-                  className="h-full w-full object-cover object-center"
-                  width={300}
-                  height={300}
-                />
+                <Link href={`/product/${product.slug}`}>
+                  <Image
+                    src={product.imageUrl}
+                    alt={product.name}
+                    className="h-full w-full object-cover object-center cursor-pointer"
+                    width={300}
+                    height={300}
+                  />
+                </Link>
               </div>
               <div className="mt-4 flex justify-between">
                 <div>
