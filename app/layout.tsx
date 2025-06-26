@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import CartProvider from "./components/Providers";
-import Navbar from "./components/Navbar";
-import ShoppingCartModal from "./components/ShoppingCartModal";
+import ClientWrapper from "./components/ClientWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,11 +22,9 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </head>
       <body className={inter.className}>
-        <CartProvider>
-          <Navbar />
-          <ShoppingCartModal />
+        <ClientWrapper>
           {children}
-        </CartProvider>
+        </ClientWrapper>
       </body>
     </html>
   );

@@ -20,10 +20,10 @@ export default function ImageGallery({ images }: iAppProps) {
   // If no images available, show a placeholder
   if (imageArray.length === 0) {
     return (
-      <div className="grid gap-4 lg:grid-cols-5">
+      <div className="grid gap-2 sm:gap-4 lg:grid-cols-5">
         <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-5">
-          <div className="h-72 w-full flex items-center justify-center bg-gray-100">
-            <p className="text-gray-500">No images available</p>
+          <div className="h-64 w-full sm:h-72 lg:h-96 flex items-center justify-center bg-gray-100">
+            <p className="text-gray-500 text-sm sm:text-base">No images available</p>
           </div>
         </div>
       </div>
