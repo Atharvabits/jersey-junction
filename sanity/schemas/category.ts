@@ -47,7 +47,7 @@ export default {
           ],
         },
       ],
-      hidden: ({ document }) => !document?.hasTeams,
+      hidden: ({ document }: { document: any }) => !document?.hasTeams,
     },
   ],
 }

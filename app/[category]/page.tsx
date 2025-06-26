@@ -35,7 +35,8 @@ async function getTeamsForCategory(category: string) {
   }`;
   
   const products = await client.fetch(query);
-  const teams = [...new Set(products.map((p: any) => p.team))].filter(Boolean);
+  const teamSet = new Set(products.map((p: any) => p.team));
+  const teams = Array.from(teamSet).filter(Boolean) as string[];
   return teams;
 }
 
