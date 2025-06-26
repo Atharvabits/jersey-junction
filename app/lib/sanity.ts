@@ -5,7 +5,7 @@ export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "gk4xzq5b",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2022-03-25",
-  useCdn: true,
+  useCdn: false, // Disable CDN caching for development to get fresh data
 });
 
 const builder = imageUrlBuilder(client);

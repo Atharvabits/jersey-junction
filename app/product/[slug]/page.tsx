@@ -44,9 +44,12 @@ export default async function ProductPge({
   const images = data.images || [];
   const firstImage = images.length > 0 ? images[0] : null;
 
+  // Handle case where price is null or undefined
+  const price = data.price || 0;
+
   // Calculate original price (show as crossed out)
-  const originalPrice = Math.floor(data.price * 2.5);
-  const discountPercent = Math.floor(((originalPrice - data.price) / originalPrice) * 100);
+  const originalPrice = Math.floor(price * 2.5);
+  const discountPercent = Math.floor(((originalPrice - price) / originalPrice) * 100);
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -107,7 +110,7 @@ export default async function ProductPge({
               <div className="mb-6 sm:mb-8">
                 <div className="flex items-center space-x-2 sm:space-x-3 mb-2">
                   <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-                    ₹{data.price.toLocaleString()}.00
+                    ₹{price.toLocaleString()}.00
                   </span>
                   <span className="text-base sm:text-lg lg:text-xl text-gray-500 line-through">
                     ₹{originalPrice.toLocaleString()}.00
@@ -145,7 +148,7 @@ export default async function ProductPge({
                       description={data.description}
                       image={firstImage}
                       name={data.name}
-                      price={data.price}
+                      price={price}
                       key={data._id}
                       price_id={data.price_id}
                     />
@@ -156,7 +159,7 @@ export default async function ProductPge({
                       description={data.description}
                       image={firstImage}
                       name={data.name}
-                      price={data.price}
+                      price={price}
                       key={data._id}
                       price_id={data.price_id}
                       slug={data.slug}

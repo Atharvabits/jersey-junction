@@ -2,8 +2,8 @@
 
 import { ReactNode } from "react";
 import CartProvider from "./Providers";
-import Navbar from "./Navbar";
 import ShoppingCartModal from "./ShoppingCartModal";
+import Navbar from "./Navbar";
 
 export default function ClientWrapper({ children }: { children: ReactNode }) {
   return (

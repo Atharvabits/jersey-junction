@@ -6,6 +6,8 @@ export interface simplifiedProduct {
   categoryName: string;
   name: string;
   size?: string[];
+  team?: string;
+  season?: string;
 }
 
 export interface fullProduct {
@@ -18,4 +20,6 @@ export interface fullProduct {
   description: string;
   price_id: string;
   size?: string[];
+  team?: string;
+  season?: string;
 }
