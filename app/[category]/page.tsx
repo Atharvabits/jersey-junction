@@ -160,13 +160,22 @@ export default async function CategoryPage({
               <div key={product._id} className="group relative">
                 <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                   <Link href={`/product/${product.slug}`}>
-                    <Image
-                      src={product.imageUrl}
-                      alt="Product image"
-                      className="w-full h-full object-cover object-center lg:h-full lg:w-full cursor-pointer"
-                      width={300}
-                      height={300}
-                    />
+                    {product.imageUrl ? (
+                      <Image
+                        src={product.imageUrl}
+                        alt="Product image"
+                        className="w-full h-full object-cover object-center lg:h-full lg:w-full cursor-pointer"
+                        width={300}
+                        height={300}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-100 flex items-center justify-center cursor-pointer">
+                        <div className="text-center text-gray-400">
+                          <div className="text-4xl mb-2">📷</div>
+                          <p className="text-sm">No Image</p>
+                        </div>
+                      </div>
+                    )}
                   </Link>
                 </div>
 

@@ -10,14 +10,32 @@ interface iAppProps {
 
 export default function ImageGallery({ images }: iAppProps) {
   // Handle case where images is null, undefined, or empty
-  const imageArray = images || [];
+  // Also filter out images that don't have proper asset references
+  const imageArray = (images || []).filter((image: any) => {
+    // Check if image has asset reference and not just _upload property
+    return image && image.asset && !image._upload;
+  });
+  
   const [bigImage, setBigImage] = useState(imageArray.length > 0 ? imageArray[0] : null);
 
   const handleSmallImageClick = (image: any) => {
     setBigImage(image);
   };
 
-  // If no images available, show a placeholder
+  // Helper function to safely get image URL
+  const getImageUrl = (image: any) => {
+    try {
+      if (!image || !image.asset) {
+        return null;
+      }
+      return urlFor(image).url();
+    } catch (error) {
+      console.error('Error generating image URL:', error);
+      return null;
+    }
+  };
+
+  // If no valid images available, show a placeholder
   if (imageArray.length === 0) {
     return (
       <div className="grid gap-2 sm:gap-4 lg:grid-cols-5">
@@ -33,24 +51,29 @@ export default function ImageGallery({ images }: iAppProps) {
   return (
     <div className="grid gap-2 sm:gap-4 lg:grid-cols-5">
       <div className="order-last flex gap-2 sm:gap-4 lg:order-none lg:flex-col">
-        {imageArray.map((image: any, idx: any) => (
-          <div key={idx} className="overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
-            <Image
-              src={urlFor(image).url()}
-              width={100}
-              height={100}
-              alt="photo"
-              className="h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 object-cover object-center cursor-pointer"
-              onClick={() => handleSmallImageClick(image)}
-            />
-          </div>
-        ))}
+        {imageArray.map((image: any, idx: any) => {
+          const imageUrl = getImageUrl(image);
+          if (!imageUrl) return null;
+          
+          return (
+            <div key={idx} className="overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
+              <Image
+                src={imageUrl}
+                width={100}
+                height={100}
+                alt="photo"
+                className="h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 object-cover object-center cursor-pointer"
+                onClick={() => handleSmallImageClick(image)}
+              />
+            </div>
+          );
+        })}
       </div>
 
       <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
-        {bigImage && (
+        {bigImage && getImageUrl(bigImage) && (
           <Image
-            src={urlFor(bigImage).url()}
+            src={getImageUrl(bigImage)!}
             alt="Photo"
             width={400}
             height={400}

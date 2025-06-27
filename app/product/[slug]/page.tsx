@@ -41,8 +41,16 @@ export default async function ProductPge({
   }
 
   // Handle case where images array is null or undefined
-  const images = data.images || [];
-  const firstImage = images.length > 0 ? images[0] : null;
+  // Also filter out images that don't have proper asset references
+  const allImages = data.images || [];
+  const validImages = allImages.filter((image: any) => {
+    // Check if image has asset reference and not just _upload property
+    return image && image.asset && !image._upload;
+  });
+  
+  // Use validImages for display and firstImage for cart operations
+  const images = validImages;
+  const firstImage = validImages.length > 0 ? validImages[0] : null;
 
   // Handle case where price is null or undefined
   const price = data.price || 0;

@@ -102,13 +102,22 @@ async function SearchResultsContent({ query }: { query: string }) {
             <div key={product._id} className="group">
               <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
                 <Link href={`/product/${product.slug}`}>
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    className="h-full w-full object-cover object-center cursor-pointer"
-                    width={300}
-                    height={300}
-                  />
+                  {product.imageUrl ? (
+                    <Image
+                      src={product.imageUrl}
+                      alt={product.name}
+                      className="h-full w-full object-cover object-center cursor-pointer"
+                      width={300}
+                      height={300}
+                    />
+                  ) : (
+                    <div className="h-full w-full bg-gray-100 flex items-center justify-center cursor-pointer">
+                      <div className="text-center text-gray-400">
+                        <div className="text-4xl mb-2">📷</div>
+                        <p className="text-sm">No Image</p>
+                      </div>
+                    </div>
+                  )}
                 </Link>
               </div>
               <div className="mt-4 flex justify-between">

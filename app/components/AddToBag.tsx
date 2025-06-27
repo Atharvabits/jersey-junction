@@ -24,12 +24,25 @@ export default function AddToBag({
 }: ProductCart) {
   const { addItem, handleCartClick } = useShoppingCart();
 
+  // Helper function to safely get image URL
+  const getImageUrl = (image: any) => {
+    try {
+      if (!image || !image.asset) {
+        return "/placeholder-image.svg";
+      }
+      return urlFor(image).url();
+    } catch (error) {
+      console.error('Error generating image URL:', error);
+      return "/placeholder-image.svg";
+    }
+  };
+
   const product = {
     name: name,
     description: description,
     price: price,
     currency: currency,
-    image: image ? urlFor(image).url() : "/placeholder-image.jpg",
+    image: getImageUrl(image),
     price_id: price_id,
   };
   return (
